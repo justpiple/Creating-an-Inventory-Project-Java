@@ -74,6 +74,10 @@ public class Product {
     return qty * price;
   }
 
+  public void setActive(boolean status) {
+    this.status = status;
+  }
+
   public String toString() {
     return "Item Number\t\t: " + itemNumber + "\nName\t\t\t: " + productName + "\nQuantity in stock\t: " + qty
         + "\nPrice\t\t\t: "
