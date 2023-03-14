@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import javax.xml.transform.Templates;
+
 public class ProductTester {
   public static void main(String[] args) {
     Scanner in = new Scanner(System.in);
@@ -109,26 +111,113 @@ public class ProductTester {
   }
 
   public static void addToInventory(Product[] products, Scanner in) {
-    int tempNumber, tempQty;
-    double tempPrice;
-    String tempName;
+    // int tempQty;
+    // double tempPrice;
+    // String tempName;
+    // for (int i = 0; i < products.length; i++) {
+    // System.out.println("=====Product " + (i + 1) + "=====");
+    // // in.nextLine();
+    // // System.out.print("Item Number: ");
+    // // tempNumber = in.nextInt();
+
+    // in.nextLine();// clear input buffer
+    // System.out.print("Product Name: ");
+    // tempName = in.nextLine();
+
+    // System.out.print("Quantity: ");
+    // tempQty = in.nextInt();
+
+    // System.out.print("Price: ");
+    // tempPrice = in.nextDouble();
+    // products[i] = new Product(i + 1, tempName, tempQty, tempPrice);
+    // }
+
+    int stockChoice = -1;
     for (int i = 0; i < products.length; i++) {
       System.out.println("=====Product " + (i + 1) + "=====");
-      // in.nextLine();
-      // System.out.print("Item Number: ");
-      // tempNumber = in.nextInt();
-
-      in.nextLine();// clear input buffer
-      System.out.print("Product Name: ");
-      tempName = in.nextLine();
-
-      System.out.print("Quantity: ");
-      tempQty = in.nextInt();
-
-      System.out.print("Price: ");
-      tempPrice = in.nextDouble();
-      products[i] = new Product(i + 1, tempName, tempQty, tempPrice);
+      System.out.println("1: CD\n2: DVD");
+      do {
+        try {
+          System.out.print("Please enter the product type: ");
+          stockChoice = in.nextInt();
+          if (stockChoice < 0 || stockChoice > 2)
+            System.out.println("Incorrect Value entered");
+        } catch (Exception e) {
+          System.out.println("Incorrect data type entered!");
+          in.nextLine();
+        }
+      } while (stockChoice < 0 || stockChoice > 2);
+      switch (stockChoice) {
+        case 1 -> addCDToInventory(products, in, i);
+        case 2 -> addDVDToInventory(products, in, i);
+      }
     }
+  }
+
+  public static void addDVDToInventory(Product[] products, Scanner in, int i) {
+    int tempQty, tempAgeRating, tempLength;
+    double tempPrice;
+    String tempName, tempStudioName;
+    // for (int i = 0; i < products.length; i++) {
+    // System.out.println("=====Product " + (i + 1) + "=====");
+    // in.nextLine();
+    // System.out.print("Item Number: ");
+    // tempNumber = in.nextInt();
+
+    in.nextLine();// clear input buffer
+    System.out.print("Please enter the DVD name: ");
+    tempName = in.nextLine();
+
+    System.out.print("Please enter the film studio name: ");
+    tempStudioName = in.nextLine();
+
+    System.out.print("Please enter the age rating: ");
+    tempAgeRating = in.nextInt();
+
+    System.out.print("Please enter the length in minutes: ");
+    tempLength = in.nextInt();
+
+    System.out.print("Please enter the quantity of stock for this product: ");
+    tempQty = in.nextInt();
+
+    System.out.print("Please enter the price for this product: ");
+    tempPrice = in.nextDouble();
+
+    products[i] = new DVD(i + 1, tempName, tempQty, tempPrice, tempLength, tempAgeRating, tempStudioName);
+    // }
+  }
+
+  public static void addCDToInventory(Product[] products, Scanner in, int i) {
+    int tempQty, tempNumberofSongs;
+    double tempPrice;
+    String tempName, tempArtist, tempLabel;
+    // for (int i = 0; i < products.length; i++) {
+    // System.out.println("=====Product " + (i + 1) + "=====");
+    // in.nextLine();
+    // System.out.print("Item Number: ");
+    // tempNumber = in.nextInt();
+
+    in.nextLine();// clear input buffer
+    System.out.print("Please enter the CD name: ");
+    tempName = in.nextLine();
+
+    System.out.print("Please enter the artist name: ");
+    tempArtist = in.nextLine();
+
+    System.out.print("Please enter the record label name: ");
+    tempLabel = in.nextLine();
+
+    System.out.print("Please enter the number of songs: ");
+    tempNumberofSongs = in.nextInt();
+
+    System.out.print("Please enter the quantity of stock for this product: ");
+    tempQty = in.nextInt();
+
+    System.out.print("Please enter the price for this product: ");
+    tempPrice = in.nextDouble();
+
+    products[i] = new CD(i + 1, tempName, tempQty, tempPrice, tempArtist, tempNumberofSongs, tempLabel);
+    // }
   }
 
   public static void displayInventory(Product[] parameter) {

@@ -21,11 +21,12 @@ public class Product {
     this.price = price;
   }
 
-  void addToInventory(int quantity) {
-    this.qty += quantity;
+  public void addToInventory(int quantity) {
+    if (status)
+      this.qty += quantity;
   }
 
-  void deductFromInventory(int quantity) {
+  public void deductFromInventory(int quantity) {
     this.qty -= quantity;
   }
 
